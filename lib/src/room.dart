@@ -1,7 +1,6 @@
 part of screeps;
 
 typedef void CostPredicate(String roomName, dynamic costMatrix);
-typedef bool FilterPredicate<T>(T object);
 
 class PathFinderOptions {
   /// True if creeps should be treated as traversable.
@@ -78,7 +77,7 @@ abstract class _RoomPrototype implements _EnergyContainer, _HasMemory {
 
   external static String serializePath(List<_PathStep> path);
   external static List<_PathStep> deserializePath(String path);
-  external List<dynamic> find(int type, js.JsObject opts);
+  external List<dynamic> find(int type);
   external int findExitTo(String roomName);
   external _RoomPosition getPositionAt(int x, int y);
   external List<dynamic> lookForAtArea(
@@ -115,14 +114,13 @@ class Room<T extends _RoomPrototype> extends EnergyContainer<T>
       .toList();
 
   /// Find all of the objects of the given type in this room.
-  List<T> find<T>(Find<T> type, {FilterPredicate<T> filter}) {
-    final objects = _proto.find(type.toInteger(),
-        jsify({'filter': filter != null ? allowInterop(filter) : null}));
+  List<T> find<T>(Find<T> type) {
+    final objects = _proto.find(type.toInteger());
     return objects.map((o) {
       if (type is Find<RoomObject>)
-        return new RoomObject<_RoomObjectPrototype>._internal(o);
+        return new RoomObject<_RoomObjectPrototype>._internal(o) as T;
       if (type is Find<RoomPosition>)
-        return new RoomPosition<_RoomPosition>._internal(o);
+        return new RoomPosition<_RoomPosition>._internal(o) as T;
       return o;
     }).toList();
   }
@@ -222,13 +220,11 @@ class RoomPosition<T extends _RoomPosition> {
 
   /// Find the closest position to this position out of the given positions.
   RoomPosition findClosestPosition(List<RoomPosition> positions,
-      {FilterPredicate<T> filter, bool byPath = false}) {
+      {bool byPath = false}) {
     final protos = positions.map((o) => o._proto).toList();
-    final opts =
-        jsify({'filter': filter != null ? allowInterop(filter) : null});
     final object = byPath
-        ? _proto.findClosestByPath
-        : _proto.findClosestByRange(protos, opts);
+        ? _proto.findClosestByPath(protos)
+        : _proto.findClosestByRange(protos);
 
     return new RoomPosition._internal(object);
   }
@@ -236,14 +232,10 @@ class RoomPosition<T extends _RoomPosition> {
   /// Find the closest object to this object out of the given object.
   T findClosestObject<T extends RoomObject<_RoomObjectPrototype>>(
       List<T> objects,
-      {FilterPredicate<T> filter,
-      bool byPath = false}) {
+      {bool byPath = false}) {
     final protos = objects.map((o) => o._proto).toList();
-    final opts =
-        jsify({'filter': filter != null ? allowInterop(filter) : null});
-    final object = byPath
-        ? _proto.findClosestByPath
-        : _proto.findClosestByRange(protos, opts);
+    final object =
+        byPath ? _proto.findClosestByPath : _proto.findClosestByRange(protos);
 
     return new RoomObject<_RoomObjectPrototype>._internal(object) as T;
   }
