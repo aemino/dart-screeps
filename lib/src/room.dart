@@ -145,7 +145,7 @@ class Room<T extends _RoomPrototype> extends EnergyContainer<T>
       final obj = new JsObject<String, dynamic>(o);
       final object = obj[type.toString()];
       if (T is RoomObject)
-        return new RoomObject<_RoomObjectPrototype>._internal(object);
+        return new RoomObject<_RoomObjectPrototype>._internal(object) as T;
       return object;
     }).toList();
   }
@@ -261,7 +261,7 @@ class RoomPosition<T extends _RoomPosition> {
     final objects = _proto.lookFor(type.toString());
     return objects.map((o) {
       if (T is RoomObject)
-        return new RoomObject<_RoomObjectPrototype>._internal(o);
+        return new RoomObject<_RoomObjectPrototype>._internal(o) as T;
       return o;
     }).toList();
   }
