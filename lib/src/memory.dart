@@ -1,16 +1,24 @@
 part of screeps;
 
 @JS('Memory')
-abstract class _Memory {
+abstract class _MemoryStatics {
   external static dynamic get creeps;
   external static dynamic get flags;
   external static dynamic get rooms;
   external static dynamic get spawns;
 }
 
-abstract class Memory {
-  static JsObject<String, dynamic> get creeps => new JsObject(_Memory.creeps);
-  static JsObject<String, dynamic> get flags => new JsObject(_Memory.flags);
-  static JsObject<String, dynamic> get rooms => new JsObject(_Memory.rooms);
-  static JsObject<String, dynamic> get spawns => new JsObject(_Memory.spawns);
+@JS('Memory')
+external dynamic get _Memory; // ignore: non_constant_identifier_names
+
+class MemoryObject extends JsObject<String, dynamic> {
+  MemoryObject(object) : super(object);
+
+  JsObject<String, dynamic> creeps = new JsObject(_MemoryStatics.creeps);
+  JsObject<String, dynamic> flags = new JsObject(_MemoryStatics.flags);
+  JsObject<String, dynamic> rooms = new JsObject(_MemoryStatics.rooms);
+  JsObject<String, dynamic> spawns = new JsObject(_MemoryStatics.spawns);
 }
+
+// ignore: non_constant_identifier_names
+final Memory = new MemoryObject(_Memory);
