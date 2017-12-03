@@ -753,7 +753,7 @@ class StructureSpawn<T extends _StructureSpawnPrototype>
       {Map<String, dynamic> memory,
       List<SpawnEnergyProvider> energyProviders,
       bool dryRun}) {
-    final js.JsObject opts = new js.JsObject.jsify({
+    final dynamic opts = jsify({
       'memory': memory,
       'energyStructures': (energyProviders != null)
           ? energyProviders.map((p) => p._proto).toList()
@@ -761,15 +761,8 @@ class StructureSpawn<T extends _StructureSpawnPrototype>
       'dryRun': dryRun
     });
 
-    _catchError(() => new js.JsObject.fromBrowserObject(_proto).callMethod(
-            'spawnCreep', [
-          new js.JsObject.jsify(body.map((p) => p.toString())),
-          name,
-          opts
-        ]));
-
-    /* _catchError(() => _proto.spawnCreep(body.map((p) => p.toString()).toList(),
-        name, getProperty(opts, '_jsObject'))); */
+    _catchError(() =>
+        _proto.spawnCreep(body.map((p) => p.toString()).toList(), name, opts));
   }
 
   /// Recycle an adjacent creep, killing it and dropping a portion of the
