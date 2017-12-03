@@ -70,7 +70,8 @@ class ConstructiveJsObject<K, V, T> {
   bool containsKey(K key) => _object.containsKey(key);
   bool containsValue(V value) => _object.containsValue(value);
 
-  void forEach(void action(K key, V value)) => _object.forEach(action);
+  void forEach(void action(K key, T value)) =>
+      _object.forEach((key, value) => action(key, _construct(value)));
 
   T operator [](K key) => _construct(_object[key]);
   void operator []=(K key, dynamic value) => _object[key] = value;
