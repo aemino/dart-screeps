@@ -120,7 +120,7 @@ class Room<T extends _RoomPrototype> extends EnergyContainer<T>
       if (type is Find<RoomObject>)
         return new RoomObject<_RoomObjectPrototype>._internal(o) as T;
       if (type is Find<RoomPosition>)
-        return new RoomPosition<_RoomPosition>._internal(o) as T;
+        return new RoomPosition<_RoomPosition>._internal(o);
       return o;
     }).toList();
   }
