@@ -64,7 +64,6 @@ class PathStep<T extends _PathStep> {
 
 @JS('Room')
 abstract class _RoomPrototype implements _EnergyContainer, _HasMemory {
-  external _StructureControllerPrototype get controller;
   @JS('energyAvailable')
   external int get energy;
 
@@ -72,6 +71,7 @@ abstract class _RoomPrototype implements _EnergyContainer, _HasMemory {
   external int get energyCapacity;
 
   external String get name;
+  external _StructureControllerPrototype get controller;
   external _StructureStoragePrototype get storage;
   external _StructureTerminalPrototype get terminal;
   external _RoomVisualPrototype get visual;
@@ -91,6 +91,9 @@ class Room<T extends _RoomPrototype> extends EnergyContainer<T>
   final T _proto;
 
   Room._internal(this._proto);
+
+  StructureController get controller =>
+      new StructureController._internal(_proto.controller);
 
   StructureStorage get storage =>
       new StructureStorage._internal(_proto.storage);
