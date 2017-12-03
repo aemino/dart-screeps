@@ -738,7 +738,7 @@ class StructureSpawn<T extends _StructureSpawnPrototype>
       List<Structure> energyProviders,
       bool dryRun}) {
     final js.JsObject opts = new js.JsObject.jsify({
-      'memory': memory,
+      'memory': new js.JsObject.jsify(memory),
       'energyStructures': energyProviders,
       'dryRun': dryRun
     });
