@@ -24,7 +24,10 @@ class JsObject<K, V> {
 
   List<K> get keys => _keys ?? (_keys = _getKeys(_object));
   List<V> get values => _values ?? (_values = _getValues(_object));
+
   int get length => keys.length;
+  bool get isEmpty => keys.isEmpty;
+  bool get isNotEmpty => keys.isNotEmpty;
 
   bool containsKey(K key) => keys.contains(key);
   bool containsValue(V value) => values.contains(value);
@@ -59,6 +62,15 @@ class ConstructiveJsObject<K, V, T> {
 
   List<K> get keys => _object.keys;
   List<T> get values => _values ?? (_values = _object.values.map(_construct));
+
+  int get length => _object.length;
+  bool get isEmpty => _object.isEmpty;
+  bool get isNotEmpty => _object.isNotEmpty;
+
+  bool containsKey(K key) => _object.containsKey(key);
+  bool containsValue(V value) => _object.containsValue(value);
+
+  void forEach(void action(K key, V value)) => _object.forEach(action);
 
   T operator [](K key) => _construct(_object[key]);
   void operator []=(K key, dynamic value) => _object[key] = value;
