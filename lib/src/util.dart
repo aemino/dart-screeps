@@ -17,11 +17,20 @@ external List<dynamic> _getValues(o);
 
 class JsObject<K, V> {
   final dynamic _object;
+  List<K> _keys;
+  List<V> _values;
 
-  const JsObject(this._object);
+  JsObject(this._object);
 
-  List<K> get keys => _getKeys(_object);
-  List<V> get values => _getValues(_object);
+  List<K> get keys => _keys ?? (_keys = _getKeys(_object));
+  List<V> get values => _values ?? (_values = _getValues(_object));
+  int get length => keys.length;
+
+  bool containsKey(K key) => keys.contains(key);
+  bool containsValue(V value) => values.contains(value);
+
+  void forEach(void action(K key, V value)) =>
+      keys.forEach((key) => action(key, this[key]));
 
   V operator [](K key) {
     var value = getProperty(_object, key);
@@ -39,16 +48,17 @@ class JsObject<K, V> {
 
 typedef Constructor<V, T> = T Function(V value);
 
-class ConstructiveJsObject<K, V, T> implements JsObject<K, T> {
+class ConstructiveJsObject<K, V, T> {
   JsObject<K, V> _object;
   final Constructor<V, T> _construct;
+  List<T> _values;
 
   ConstructiveJsObject(dynamic object, this._construct) {
     _object = new JsObject(object);
   }
 
   List<K> get keys => _object.keys;
-  List<T> get values => _object.values.map(_construct);
+  List<T> get values => _values ?? (_values = _object.values.map(_construct));
 
   T operator [](K key) => _construct(_object[key]);
   void operator []=(K key, dynamic value) => _object[key] = value;

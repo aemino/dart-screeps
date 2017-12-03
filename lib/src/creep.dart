@@ -480,7 +480,7 @@ class Creep<T extends _CreepPrototype> extends RoomObject<T>
   /// Withdraw resources from an adjacent structure.
   ///
   /// Your creeps can withdraw resources from hostile structures, as long as
-  /// no hostile rampart is on it.
+  /// no hostile rampart is on top of it.
   ///
   /// May throw:
   /// * [NotOwnerException] - You are not the owner of this creep.

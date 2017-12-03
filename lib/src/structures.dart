@@ -743,8 +743,8 @@ class StructureSpawn<T extends _StructureSpawnPrototype>
       'dryRun': dryRun
     });
 
-    _catchError(
-        () => _proto.spawnCreep(body.map((p) => p.toString()), name, opts));
+    _catchError(() =>
+        _proto.spawnCreep(body.map((p) => p.toString()).toList(), name, opts));
   }
 
   /// Recycle an adjacent creep, killing it and dropping a portion of the
