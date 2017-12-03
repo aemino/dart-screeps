@@ -81,9 +81,6 @@ external int get _findSourcesActive;
 @JS('FIND_SOURCES')
 external int get _findSources;
 
-@JS('FIND_DROPPED_ENERGY')
-external int get _findDroppedEnergy;
-
 @JS('FIND_DROPPED_RESOURCES')
 external int get _findDroppedResources;
 
@@ -131,7 +128,6 @@ final Map<int, Find> _intToFind = {
   _findHostileCreeps: Find.hostileCreeps,
   _findSourcesActive: Find.sourcesActive,
   _findSources: Find.sources,
-  _findDroppedEnergy: Find.droppedEnergy,
   _findDroppedResources: Find.droppedResources,
   _findStructures: Find.structures,
   _findMyStructures: Find.myStructures,

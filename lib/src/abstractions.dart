@@ -67,8 +67,6 @@ abstract class Find<T> {
   static final Find<Creep> hostileCreeps = new _FindImpl(_findHostileCreeps);
   static final Find<Source> sourcesActive = new _FindImpl(_findSourcesActive);
   static final Find<Source> sources = new _FindImpl(_findSources);
-  static final Find<DroppedResource> droppedEnergy =
-      new _FindImpl(_findDroppedEnergy);
   static final Find<DroppedResource> droppedResources =
       new _FindImpl(_findDroppedResources);
   static final Find<Structure> structures = new _FindImpl(_findStructures);
