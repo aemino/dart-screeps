@@ -753,16 +753,13 @@ class StructureSpawn<T extends _StructureSpawnPrototype>
       {Map<String, dynamic> memory,
       List<SpawnEnergyProvider> energyProviders,
       bool dryRun}) {
-    final dynamic opts = jsify({
-      'memory': memory,
-      'energyStructures': (energyProviders != null)
-          ? energyProviders.map((p) => p._proto).toList()
-          : null,
-      'dryRun': dryRun
-    });
+    final Map<String, dynamic> opts = {'memory': memory, 'dryRun': dryRun};
 
-    _catchError(() =>
-        _proto.spawnCreep(body.map((p) => p.toString()).toList(), name, opts));
+    if (energyProviders != null)
+      opts['energyStructures'] = energyProviders.map((p) => p._proto).toList();
+
+    _catchError(() => _proto.spawnCreep(
+        body.map((p) => p.toString()).toList(), name, jsify(opts)));
   }
 
   /// Recycle an adjacent creep, killing it and dropping a portion of the
