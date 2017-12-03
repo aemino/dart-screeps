@@ -1,0 +1,18 @@
+name: screeps
+description: Dart bindings for the JavaScript Screeps API.
+homepage: https://www.github.com/aemino/dart-screeps
+author: aemino <aeminodev@gmail.com>
+
+version: 0.0.1
+
+environment:
+  sdk: '>=1.20.1 <2.0.0'
+
+dependencies:
+  js: ^0.6.1
+  meta: ^1.1.2
+
+dev_dependencies:
+  grinder: ^0.8.0+3
+  pub_semver: ^1.3.2
+  yaml: ^2.1.13
