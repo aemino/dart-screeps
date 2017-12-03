@@ -757,12 +757,19 @@ class StructureSpawn<T extends _StructureSpawnPrototype>
       'memory': memory,
       'energyStructures': (energyProviders != null)
           ? energyProviders.map((p) => p._proto).toList()
-          : energyProviders,
+          : null,
       'dryRun': dryRun
     });
 
-    _catchError(() =>
-        _proto.spawnCreep(body.map((p) => p.toString()).toList(), name, opts));
+    _catchError(() => new js.JsObject.fromBrowserObject(_proto).callMethod(
+            'spawnCreep', [
+          new js.JsObject.jsify(body.map((p) => p.toString())),
+          name,
+          opts
+        ]));
+
+    /* _catchError(() => _proto.spawnCreep(body.map((p) => p.toString()).toList(),
+        name, getProperty(opts, '_jsObject'))); */
   }
 
   /// Recycle an adjacent creep, killing it and dropping a portion of the
