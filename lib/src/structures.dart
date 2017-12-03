@@ -114,6 +114,7 @@ class OwnedStructure<T extends _OwnedStructurePrototype> extends Structure<T>
 }
 
 abstract class _SpawnEnergyProvider {}
+
 abstract class SpawnEnergyProvider<T extends _SpawnEnergyProvider> {
   T _proto;
 }
@@ -280,10 +281,15 @@ class StructureController<T extends _StructureControllerPrototype>
 
 @JS('StructureExtension')
 abstract class _StructureExtensionPrototype
-    implements _OwnedStructurePrototype, _SpawnEnergyProvider, _EnergyContainer, _Attackable {}
+    implements
+        _OwnedStructurePrototype,
+        _SpawnEnergyProvider,
+        _EnergyContainer,
+        _Attackable {}
 
 class StructureExtension<T extends _StructureExtensionPrototype>
-    extends OwnedStructure<T> with SpawnEnergyProvider<T>, EnergyContainer<T>, Attackable<T> {
+    extends OwnedStructure<T>
+    with SpawnEnergyProvider<T>, EnergyContainer<T>, Attackable<T> {
   final T _proto;
 
   StructureExtension._internal(this._proto) : super._internal(_proto);
@@ -701,7 +707,11 @@ abstract class _StructureSpawnPrototype
 
 class StructureSpawn<T extends _StructureSpawnPrototype>
     extends OwnedStructure<T>
-    with SpawnEnergyProvider<T>, EnergyContainer<T>, HasMemory<T>, Attackable<T> {
+    with
+        SpawnEnergyProvider<T>,
+        EnergyContainer<T>,
+        HasMemory<T>,
+        Attackable<T> {
   final T _proto;
 
   StructureSpawn._internal(this._proto) : super._internal(_proto);
@@ -744,8 +754,10 @@ class StructureSpawn<T extends _StructureSpawnPrototype>
       List<SpawnEnergyProvider> energyProviders,
       bool dryRun}) {
     final js.JsObject opts = new js.JsObject.jsify({
-      'memory': new js.JsObject.jsify(memory),
-      'energyStructures': energyProviders.map((p) => p._proto).toList(),
+      'memory': memory,
+      'energyStructures': (energyProviders != null)
+          ? energyProviders.map((p) => p._proto).toList()
+          : energyProviders,
       'dryRun': dryRun
     });
 
