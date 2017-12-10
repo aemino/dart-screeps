@@ -9,9 +9,7 @@ abstract class _DroppedResourcePrototype
 
 class DroppedResource<T extends _DroppedResourcePrototype> extends RoomObject<T>
     with ScreepsObject<T> {
-  final T _proto;
-
-  DroppedResource._internal(this._proto) : super._internal(_proto);
+  DroppedResource._internal(T _proto) : super._internal(_proto);
 
   static DroppedResource fromObject(ScreepsObject object) =>
       new DroppedResource._internal(object._proto);

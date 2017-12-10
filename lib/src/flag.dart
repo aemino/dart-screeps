@@ -12,9 +12,7 @@ abstract class _FlagPrototype implements _RoomObjectPrototype, _HasMemory {
 }
 
 class Flag<T extends _FlagPrototype> extends RoomObject<T> with HasMemory<T> {
-  final T _proto;
-
-  Flag._internal(this._proto) : super._internal(_proto);
+  Flag._internal(T _proto) : super._internal(_proto);
 
   /// The name of this flag.  The name is unique, immutable, and chosen upon
   /// flag creation.

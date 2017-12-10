@@ -85,11 +85,9 @@ abstract class _RoomPrototype implements _EnergyContainer, _HasMemory {
       [bool asArray = true]); // ignore: avoid_positional_boolean_parameters
 }
 
-class Room<T extends _RoomPrototype> extends EnergyContainer<T>
-    with HasMemory<T> {
-  final T _proto;
-
-  Room._internal(this._proto);
+class Room<T extends _RoomPrototype> extends JsPrototypeWrapper<T>
+    with EnergyContainer<T>, HasMemory<T> {
+  Room._internal(T _proto) : super._internal(_proto);
 
   StructureController get controller =>
       new StructureController._internal(_proto.controller);
@@ -114,11 +112,11 @@ class Room<T extends _RoomPrototype> extends EnergyContainer<T>
       .toList();
 
   /// Find all of the objects of the given type in this room.
-  List<T> find<T>(Find<T> type) {
+  List<T> find<T extends RoomObject<_RoomObjectPrototype>>(Find<T> type) {
     final objects = _proto.find(type.toInteger());
     return objects.map((o) {
       if (type is Find<RoomObject>)
-        return new RoomObject<_RoomObjectPrototype>._internal(o) as T;
+        new RoomObject<_RoomObjectPrototype>._internal(o) as T;
       if (type is Find<RoomPosition>)
         return new RoomPosition<_RoomPosition>._internal(o);
       return o;
@@ -145,7 +143,7 @@ class Room<T extends _RoomPrototype> extends EnergyContainer<T>
       final obj = new JsObject<String, dynamic>(o);
       final object = obj[type.toString()];
       if (T is RoomObject)
-        return new RoomObject<_RoomObjectPrototype>._internal(object) as T;
+        new RoomObject<_RoomObjectPrototype>._internal(object) as T;
       return object;
     }).toList();
   }
@@ -172,13 +170,11 @@ abstract class _RoomPosition {
   external List<dynamic> lookFor(String type);
 }
 
-class RoomPosition<T extends _RoomPosition> {
-  T _proto;
-
+class RoomPosition<T extends _RoomPosition> extends JsPrototypeWrapper<T> {
   factory RoomPosition(int x, int y, String roomName) =>
       new RoomPosition._internal(new _RoomPosition(x, y, roomName));
 
-  RoomPosition._internal(this._proto);
+  RoomPosition._internal(T _proto) : super._internal(_proto);
 
   /// The x-position in the room.
   int get x => _proto.x;

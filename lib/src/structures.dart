@@ -21,9 +21,7 @@ abstract class _OwnedStructurePrototype
 
 class Structure<T extends _StructurePrototype> extends RoomObject<T>
     with ScreepsObject<T>, Destructible<T>, Transferable<T> {
-  final T _proto;
-
-  Structure._internal(this._proto) : super._internal(_proto);
+  Structure._internal(T _proto) : super._internal(_proto);
 
   static Structure fromObject(ScreepsObject object) =>
       new Structure._internal(object._proto);
@@ -107,7 +105,7 @@ class OwnedStructure<T extends _OwnedStructurePrototype> extends Structure<T>
     with OwnedObject<T> {
   T _proto;
 
-  OwnedStructure._internal(this._proto) : super._internal(_proto);
+  OwnedStructure._internal(T _proto) : super._internal(_proto);
 
   static OwnedStructure fromObject(ScreepsObject object) =>
       new OwnedStructure._internal(object._proto);
@@ -130,9 +128,7 @@ abstract class _StructureContainerPrototype
 class StructureContainer<T extends _StructureContainerPrototype>
     extends Structure<T>
     with StructureInventory<T>, Decayable<T>, Attackable<T> {
-  final T _proto;
-
-  StructureContainer._internal(this._proto) : super._internal(_proto);
+  StructureContainer._internal(T _proto) : super._internal(_proto);
 
   static StructureContainer fromObject(ScreepsObject object) =>
       new StructureContainer._internal(object._proto);
@@ -220,9 +216,7 @@ class SafeMode {
 
 class StructureController<T extends _StructureControllerPrototype>
     extends OwnedStructure<T> with Progressing<T> {
-  final T _proto;
-
-  StructureController._internal(this._proto) : super._internal(_proto);
+  StructureController._internal(T _proto) : super._internal(_proto);
 
   static StructureController fromObject(ScreepsObject object) =>
       new StructureController._internal(object._proto);
@@ -290,9 +284,7 @@ abstract class _StructureExtensionPrototype
 class StructureExtension<T extends _StructureExtensionPrototype>
     extends OwnedStructure<T>
     with SpawnEnergyProvider<T>, EnergyContainer<T>, Attackable<T> {
-  final T _proto;
-
-  StructureExtension._internal(this._proto) : super._internal(_proto);
+  StructureExtension._internal(T _proto) : super._internal(_proto);
 
   static StructureExtension fromObject(ScreepsObject object) =>
       new StructureExtension._internal(object._proto);
@@ -304,9 +296,7 @@ abstract class _StructureExtractorPrototype
 
 class StructureExtractor<T extends _StructureExtractorPrototype>
     extends OwnedStructure<T> with CooldownObject<T>, Attackable<T> {
-  final T _proto;
-
-  StructureExtractor._internal(this._proto) : super._internal(_proto);
+  StructureExtractor._internal(T _proto) : super._internal(_proto);
 
   static StructureExtractor fromObject(ScreepsObject object) =>
       new StructureExtractor._internal(object._proto);
@@ -320,9 +310,7 @@ abstract class _StructureKeeperLairPrototype
 
 class StructureKeeperLair<T extends _StructureKeeperLairPrototype>
     extends OwnedStructure<T> {
-  final T _proto;
-
-  StructureKeeperLair._internal(this._proto) : super._internal(_proto);
+  StructureKeeperLair._internal(T _proto) : super._internal(_proto);
 
   static StructureKeeperLair fromObject(ScreepsObject object) =>
       new StructureKeeperLair._internal(object._proto);
@@ -345,9 +333,7 @@ abstract class _StructureLabPrototype
 
 class StructureLab<T extends _StructureLabPrototype> extends OwnedStructure<T>
     with EnergyContainer<T>, MineralContainer<T>, CooldownObject<T> {
-  final T _proto;
-
-  StructureLab._internal(this._proto) : super._internal(_proto);
+  StructureLab._internal(T _proto) : super._internal(_proto);
 
   static StructureLab fromObject(ScreepsObject object) =>
       new StructureLab._internal(object._proto);
@@ -396,9 +382,7 @@ abstract class _StructureLinkPrototype
 
 class StructureLink<T extends _StructureLinkPrototype> extends OwnedStructure<T>
     with EnergyContainer<T>, CooldownObject<T>, Attackable<T> {
-  final T _proto;
-
-  StructureLink._internal(this._proto) : super._internal(_proto);
+  StructureLink._internal(T _proto) : super._internal(_proto);
 
   static StructureLink fromObject(ScreepsObject object) =>
       new StructureLink._internal(object._proto);
@@ -435,9 +419,7 @@ abstract class _StructureNukerPrototype
 class StructureNuker<T extends _StructureNukerPrototype>
     extends OwnedStructure<T>
     with EnergyContainer<T>, CooldownObject<T>, Attackable<T> {
-  final T _proto;
-
-  StructureNuker._internal(this._proto) : super._internal(_proto);
+  StructureNuker._internal(T _proto) : super._internal(_proto);
 
   static StructureNuker fromObject(ScreepsObject object) =>
       new StructureNuker._internal(object._proto);
@@ -474,9 +456,7 @@ abstract class _StructureObserverPrototype implements _OwnedStructurePrototype {
 
 class StructureObserver<T extends _StructureObserverPrototype>
     extends OwnedStructure<T> {
-  final T _proto;
-
-  StructureObserver._internal(this._proto) : super._internal(_proto);
+  StructureObserver._internal(T _proto) : super._internal(_proto);
 
   static StructureObserver fromObject(ScreepsObject object) =>
       new StructureObserver._internal(object._proto);
@@ -502,9 +482,7 @@ abstract class _StructurePowerBankPrototype
 
 class StructurePowerBank<T extends _StructurePowerBankPrototype>
     extends Structure<T> with Decayable<T>, Attackable<T> {
-  final T _proto;
-
-  StructurePowerBank._internal(this._proto) : super._internal(_proto);
+  StructurePowerBank._internal(T _proto) : super._internal(_proto);
 
   static StructurePowerBank fromObject(ScreepsObject object) =>
       new StructurePowerBank._internal(object._proto);
@@ -524,9 +502,7 @@ abstract class _StructurePowerSpawnPrototype
 
 class StructurePowerSpawn<T extends _StructurePowerSpawnPrototype>
     extends OwnedStructure<T> with EnergyContainer<T>, Attackable<T> {
-  final T _proto;
-
-  StructurePowerSpawn._internal(this._proto) : super._internal(_proto);
+  StructurePowerSpawn._internal(T _proto) : super._internal(_proto);
 
   static StructurePowerSpawn fromObject(ScreepsObject object) =>
       new StructurePowerSpawn._internal(object._proto);
@@ -600,9 +576,7 @@ class PortalInterShardDestination extends PortalDestination {
 
 class StructurePortal<T extends _StructurePortalPrototype> extends Structure<T>
     with Decayable<T> {
-  final T _proto;
-
-  StructurePortal._internal(this._proto) : super._internal(_proto);
+  StructurePortal._internal(T _proto) : super._internal(_proto);
 
   static StructurePortal fromObject(ScreepsObject object) =>
       new StructurePortal._internal(object._proto);
@@ -631,9 +605,7 @@ abstract class _StructureRampartPrototype
 
 class StructureRampart<T extends _StructureRampartPrototype>
     extends OwnedStructure<T> with Decayable<T>, Attackable<T> {
-  final T _proto;
-
-  StructureRampart._internal(this._proto) : super._internal(_proto);
+  StructureRampart._internal(T _proto) : super._internal(_proto);
 
   static StructureRampart fromObject(ScreepsObject object) =>
       new StructureRampart._internal(object._proto);
@@ -652,9 +624,7 @@ abstract class _StructureRoadPrototype
 
 class StructureRoad<T extends _StructureRoadPrototype> extends Structure<T>
     with Decayable<T> {
-  final T _proto;
-
-  StructureRoad._internal(this._proto) : super._internal(_proto);
+  StructureRoad._internal(T _proto) : super._internal(_proto);
 
   static StructureRoad fromObject(ScreepsObject object) =>
       new StructureRoad._internal(object._proto);
@@ -712,9 +682,7 @@ class StructureSpawn<T extends _StructureSpawnPrototype>
         EnergyContainer<T>,
         HasMemory<T>,
         Attackable<T> {
-  final T _proto;
-
-  StructureSpawn._internal(this._proto) : super._internal(_proto);
+  StructureSpawn._internal(T _proto) : super._internal(_proto);
 
   static StructureSpawn fromObject(ScreepsObject object) =>
       new StructureSpawn._internal(object._proto);
@@ -790,9 +758,7 @@ abstract class _StructureStoragePrototype
 
 class StructureStorage<T extends _StructureStoragePrototype>
     extends OwnedStructure<T> with StructureInventory<T>, Attackable<T> {
-  final T _proto;
-
-  StructureStorage._internal(this._proto) : super._internal(_proto);
+  StructureStorage._internal(T _proto) : super._internal(_proto);
 
   static StructureStorage fromObject(ScreepsObject object) =>
       new StructureStorage._internal(object._proto);
@@ -812,9 +778,7 @@ abstract class _StructureTerminalPrototype
 class StructureTerminal<T extends _StructureTerminalPrototype>
     extends OwnedStructure<T>
     with StructureInventory<T>, CooldownObject<T>, Attackable<T> {
-  final T _proto;
-
-  StructureTerminal._internal(this._proto) : super._internal(_proto);
+  StructureTerminal._internal(T _proto) : super._internal(_proto);
 
   static StructureTerminal fromObject(ScreepsObject object) =>
       new StructureTerminal._internal(object._proto);
@@ -847,9 +811,7 @@ abstract class _StructureTowerPrototype
 
 class StructureTower<T extends _StructureTowerPrototype>
     extends OwnedStructure<T> with EnergyContainer<T>, Attackable<T> {
-  final T _proto;
-
-  StructureTower._internal(this._proto) : super._internal(_proto);
+  StructureTower._internal(T _proto) : super._internal(_proto);
 
   static StructureTower fromObject(ScreepsObject object) =>
       new StructureTower._internal(object._proto);
@@ -892,9 +854,7 @@ abstract class _StructureWallPrototype
 
 class StructureWall<T extends _StructureWallPrototype> extends Structure<T>
     with Attackable<T> {
-  final T _proto;
-
-  StructureWall._internal(this._proto) : super._internal(_proto);
+  StructureWall._internal(T _proto) : super._internal(_proto);
 
   static StructureWall fromObject(ScreepsObject object) =>
       new StructureWall._internal(object._proto);

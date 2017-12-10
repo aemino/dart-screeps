@@ -8,7 +8,5 @@ abstract class _SourcePrototype
 
 class Source<T extends _SourcePrototype> extends RoomObject<T>
     with EnergyContainer<T>, Harvestable<T> {
-  final T _proto;
-
-  Source._internal(this._proto) : super._internal(_proto);
+  Source._internal(T _proto) : super._internal(_proto);
 }

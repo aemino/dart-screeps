@@ -6,10 +6,8 @@ abstract class _NukePrototype implements _RoomObjectPrototype {
   external int get timeToLand;
 }
 
-class Nuke<T extends _NukePrototype> extends RoomObject {
-  final T _proto;
-
-  Nuke._internal(this._proto) : super._internal(_proto);
+class Nuke<T extends _NukePrototype> extends RoomObject<T> {
+  Nuke._internal(T _proto) : super._internal(_proto);
 
   /// The name of the room where this nuke was launched from.
   String get launchRoomName => _proto.launchRoomName;

@@ -80,9 +80,7 @@ class Creep<T extends _CreepPrototype> extends RoomObject<T>
         HasMemory<T>,
         Attackable<T>,
         Transferable<T> {
-  final T _proto;
-
-  Creep._internal(this._proto) : super._internal(_proto);
+  Creep._internal(T _proto) : super._internal(_proto);
 
   static Creep fromObject(ScreepsObject object) =>
       new Creep._internal(object._proto);

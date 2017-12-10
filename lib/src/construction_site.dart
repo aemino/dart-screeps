@@ -17,9 +17,7 @@ abstract class _ConstructionSitePrototype
 class ConstructionSite<T extends _ConstructionSitePrototype>
     extends RoomObject<T>
     with ScreepsObject<T>, OwnedObject<T>, Progressing<T> {
-  final T _proto;
-
-  ConstructionSite._internal(this._proto) : super._internal(_proto);
+  ConstructionSite._internal(T _proto) : super._internal(_proto);
 
   static ConstructionSite fromObject(ScreepsObject object) =>
       new ConstructionSite._internal(object._proto);

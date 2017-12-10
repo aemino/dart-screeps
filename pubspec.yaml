@@ -11,8 +11,3 @@ environment:
 dependencies:
   js: ^0.6.1
   meta: ^1.1.2
-
-dev_dependencies:
-  grinder: ^0.8.0+3
-  pub_semver: ^1.3.2
-  yaml: ^2.1.13

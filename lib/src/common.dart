@@ -1,5 +1,11 @@
 part of screeps;
 
+abstract class JsPrototypeWrapper<T> {
+  final T _proto;
+
+  JsPrototypeWrapper._internal(this._proto);
+}
+
 @JS()
 @anonymous
 abstract class Owner {
@@ -19,9 +25,8 @@ abstract class _ScreepsObject {
   external String get id;
 }
 
-abstract class ScreepsObject<T extends _ScreepsObject> {
-  T _proto;
-
+abstract class ScreepsObject<T extends _ScreepsObject>
+    implements JsPrototypeWrapper<T> {
   static ScreepsObject fromObject(ScreepsObject object) => object;
 
   /// A unique object identifier.
@@ -37,9 +42,8 @@ abstract class _Destructible {
   external int get hitsMax;
 }
 
-abstract class Destructible<T extends _Destructible> {
-  T _proto;
-
+abstract class Destructible<T extends _Destructible>
+    implements JsPrototypeWrapper<T> {
   /// The remaining hitpoints of this object.
   int get hits => _proto.hits;
 
@@ -57,9 +61,8 @@ abstract class _OwnedObject {
   external bool get my;
 }
 
-abstract class OwnedObject<T extends _OwnedObject> {
-  T _proto;
-
+abstract class OwnedObject<T extends _OwnedObject>
+    implements JsPrototypeWrapper<T> {
   /// The owner of this object.
   Owner get owner => _proto.owner;
 
@@ -73,9 +76,8 @@ abstract class _Decayable {
   external int get ticksToDecay;
 }
 
-abstract class Decayable<T extends _Decayable> {
-  T _proto;
-
+abstract class Decayable<T extends _Decayable>
+    implements JsPrototypeWrapper<T> {
   /// The number of game ticks until this object will lose hitpoints.
   int get ticksToDecay => _proto.ticksToDecay;
 }
@@ -87,9 +89,8 @@ abstract class _Progressing {
   external int get progressTotal;
 }
 
-abstract class Progressing<T extends _Progressing> {
-  T _proto;
-
+abstract class Progressing<T extends _Progressing>
+    implements JsPrototypeWrapper<T> {
   /// The current progress.
   int get progress => _proto.progress;
 
@@ -107,9 +108,8 @@ abstract class _EnergyContainer {
   external int get energyCapacity;
 }
 
-class EnergyContainer<T extends _EnergyContainer> {
-  T _proto;
-
+abstract class EnergyContainer<T extends _EnergyContainer>
+    implements JsPrototypeWrapper<T> {
   /// The amount of energy contained by this object.
   int get energy => _proto.energy;
 
@@ -142,9 +142,8 @@ class MineralData {
   const MineralData._internal({this.amount, this.capacity, this.type});
 }
 
-class MineralContainer<T extends _MineralContainer> {
-  T _proto;
-
+abstract class MineralContainer<T extends _MineralContainer>
+    implements JsPrototypeWrapper<T> {
   /// True if this object contains a mineral.
   bool get hasMineral => _proto.mineralAmount > 0;
 
@@ -161,9 +160,8 @@ abstract class _CooldownObject {
   external int get cooldown;
 }
 
-class CooldownObject<T extends _CooldownObject> {
-  T _proto;
-
+abstract class CooldownObject<T extends _CooldownObject>
+    implements JsPrototypeWrapper<T> {
   /// The amount of ticks before this object can be used again.
   int get ticksToCooldown => _proto.cooldown;
 }
@@ -174,9 +172,8 @@ abstract class _Harvestable {
   external int get ticksToRegeneration;
 }
 
-class Harvestable<T extends _Harvestable> {
-  T _proto;
-
+abstract class Harvestable<T extends _Harvestable>
+    implements JsPrototypeWrapper<T> {
   /// The number of ticks before this deposit will be refilled.
   int get ticksToRegeneration => _proto.ticksToRegeneration;
 }
@@ -200,25 +197,20 @@ abstract class _StructureInventory implements _RoomObjectInventory {
   external int get storeCapacity;
 }
 
-abstract class RoomObjectInventory<T extends _RoomObjectInventory> {
-  T _proto;
-
+abstract class RoomObjectInventory<T extends _RoomObjectInventory>
+    implements JsPrototypeWrapper<T> {
   /// The inventory of this object.
   Inventory get inventory;
 }
 
 abstract class CreepInventory<T extends _CreepInventory>
     implements RoomObjectInventory<T> {
-  T _proto;
-
   Inventory get inventory => new Inventory._internal(new JsObject(_proto.carry),
       capacity: _proto.carryCapacity);
 }
 
 abstract class StructureInventory<T extends _StructureInventory>
     implements RoomObjectInventory<T> {
-  T _proto;
-
   Inventory get inventory => new Inventory._internal(new JsObject(_proto.store),
       capacity: _proto.storeCapacity);
 }
@@ -229,21 +221,18 @@ abstract class _HasMemory {
   external dynamic get memory;
 }
 
-abstract class HasMemory<T extends _HasMemory> {
-  T _proto;
-
+abstract class HasMemory<T extends _HasMemory>
+    implements JsPrototypeWrapper<T> {
   /// A shorthand getter to the [Memory] data for this object.
   JsObject<String, dynamic> get memory => new JsObject(_proto.memory);
 }
 
 abstract class _Attackable {}
 
-abstract class Attackable<T extends _Attackable> {
-  T _proto;
-}
+abstract class Attackable<T extends _Attackable>
+    implements JsPrototypeWrapper<T> {}
 
 abstract class _Transferable {}
 
-abstract class Transferable<T extends _Transferable> {
-  T _proto;
-}
+abstract class Transferable<T extends _Transferable>
+    implements JsPrototypeWrapper<T> {}
